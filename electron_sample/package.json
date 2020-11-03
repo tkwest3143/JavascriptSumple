@@ -2,8 +2,9 @@
   "name": "electron_sample",
   "version": "1.0.0",
   "description": "electron sample project",
-  "main": "src/main.js",
+  "main": "main.js",
   "devDependencies": {
+    "electron": "^10.1.5",
     "electron-builder": "^22.9.1"
   },
   "scripts": {
@@ -17,12 +18,6 @@
     "directories": {
       "output": "dist"
     },
-    "files": [
-      "assets",
-      "src",
-      "package.json",
-      "package-lock.json"
-    ],
     "mac": {
       "icon": "assets/mac/icon_mac.icns",
       "target": [
