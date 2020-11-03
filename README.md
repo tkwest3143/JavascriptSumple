@@ -1,2 +1,11 @@
 # JavascriptSumple
-Javascript勉強用のリポジトリです。
+
+Javascript 勉強用のリポジトリです。
+
+## react_sample
+
+- react のサンプルプロジェクトです
+
+## electron_sample
+
+- electron のサンプルプロジェクトです。
