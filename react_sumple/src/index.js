@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import SignIn from "./js/SignIn";
 import SignUp from "./js/SignUp";
+import UserList from "./js/UserList";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
@@ -21,6 +22,7 @@ function Index(props) {
         <Switch>
           <Route path="/SignIn" component={SignIn} />
           <Route path="/SignUp" component={SignUp} />
+          <Route path="/UserList" component={UserList} />
         </Switch>
       </div>
     </BrowserRouter>

@@ -44,19 +44,14 @@ class SignIn extends React.Component {
   }
   onSubmit = (e) => {
     e.preventDefault();
-    const url = "http://localhost:8080/getLogin";
-    const headers = {
-      "Content-Type": "application/json",
-      "X-Requested-With": "XMLHttpRequest",
-      "Access-Control-Allow-Origin": "http://localhost:3000",
-    };
-
+    var username = document.getElementById("userName").value;
+    var password = document.getElementById("password").value;
     axios.defaults.baseURL = "http://localhost:8080";
     axios
       .get("/getLogin", {
         params: {
-          username: "tk",
-          password: "tk",
+          username: username,
+          password: password,
         },
       })
       .then((res) => {
@@ -64,13 +59,13 @@ class SignIn extends React.Component {
         this.setState({ users: res.data });
       });
     //userList.setUser(this.state.user);
-    this.props.history.push("/SignUp");
+    this.props.history.push("/UserList");
   };
   render() {
     return (
       <form onSubmit={this.onSubmit}>
-        <input type="text" name="userName" />
-        <input type="password" name="password" />
+        <input type="text" name="userName" id="userName" />
+        <input type="password" name="password" id="password" />
         <button type="submit">Next→</button>
       </form>
     );
