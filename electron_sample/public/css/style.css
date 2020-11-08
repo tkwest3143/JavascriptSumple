@@ -1,0 +1,14 @@
+body {
+  text-align: center;
+}
+
+#menu {
+  background-color: aqua;
+}
+.btn-menu {
+  background-color: transparent;
+  border: none;
+}
+.btn-menu:hover {
+  background-color: rgba(117, 190, 218, 0.5); /* 50% 不透過 */
+}
