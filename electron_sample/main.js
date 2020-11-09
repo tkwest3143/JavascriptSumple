@@ -17,6 +17,7 @@ function createWindow() {
     title: app.getName(),
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
   };
   // mainWindowを作成
@@ -36,7 +37,6 @@ function createWindow() {
 
 app.on("ready", () => {
   createWindow();
-  displayAbout();
 });
 
 app.on("window-all-closed", () => {
@@ -50,5 +50,3 @@ app.on("activate", () => {
     createWindow();
   }
 });
-
-function displayAbout() {}

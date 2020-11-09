@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="lib/css/bootstrap.min.css" />
     <link rel="stylesheet" href="lib/css/bootstrap.min.css.map" />
     <link rel="stylesheet" href="css/style.css" />
-    <script type="text/javascript" src="../src/db/todoDB.js"></script>
+    <script type="text/javascript" src="../src/todo.js"></script>
+    <script type="text/javascript" src="../src/utils/common.js"></script>
   </head>
   <body>
     <div class="container-fluid">
@@ -14,7 +15,7 @@
         <h1>
           <input
             type="button"
-            id="btnNext"
+            id="btnTodayTodo"
             class="btn-menu"
             value="今日の予定"
           />
@@ -27,7 +28,7 @@
             id="btnCreateTodo"
             class="w-100 btn-menu"
             value="予定を作成"
-            onclick="todoDB();"
+            onclick="btnCreateTodo_Click();"
           />
           <input
             type="button"
