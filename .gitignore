@@ -1,4 +1,4 @@
 node_modules
 .VSCodeCounter
 dist
-*.sqlite
+*.db
