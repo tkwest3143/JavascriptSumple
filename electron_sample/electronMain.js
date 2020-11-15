@@ -1,10 +1,12 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const globalShortcut = electron.globalShortcut;
 var sqlite3 = require("sqlite3").verbose();
 
 let mainWindow = null;
 const debug = /--debug/.test(process.argv[2]);
+var isDevopen = false;
 
 /**
  * 画面作成メソッド
@@ -29,7 +31,15 @@ function createWindow() {
 
   // 次の起動コマンドでデバックモードで起動します: electron . --debug
   if (debug) {
-    mainWindow.webContents.openDevTools();
+    globalShortcut.register("Ctrl+d", function () {
+      if (isDevopen) {
+        mainWindow.webContents.closeDevTools();
+        isDevopen = false;
+      } else {
+        mainWindow.webContents.openDevTools();
+        isDevopen = true;
+      }
+    });
   }
 
   mainWindow.on("closed", function () {

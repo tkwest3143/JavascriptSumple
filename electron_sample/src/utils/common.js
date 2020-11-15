@@ -1,6 +1,9 @@
 const remote = require("electron").remote;
 const { dialog } = require("electron").remote;
 const app = remote.app;
+const globalShortcut = remote.globalShortcut;
+const debug = /--debug/.test(process.argv[2]);
+var isDevopen = false;
 
 var $ = require("jquery");
 var jQuery = require("jquery");
@@ -27,14 +30,25 @@ function showModalWindow(url) {
   let subWindow = new remote.BrowserWindow({
     parent: remote.getCurrentWindow(), //親ウィンドウのBrowserWindowオブジェクト
     modal: true,
-    show: false,
+    show: true,
     title: app.getName(),
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
     },
   });
-  subWindow.webContents.openDevTools();
+  subWindow.setMenu(null);
+  if (debug) {
+    globalShortcut.register("Ctrl+l", function () {
+      if (isDevopen) {
+        subWindow.webContents.closeDevTools();
+        isDevopen = false;
+      } else {
+        subWindow.webContents.openDevTools();
+        isDevopen = true;
+      }
+    });
+  }
   subWindow.loadURL(url);
   subWindow.once("ready-to-show", () => {
     subWindow.show();
