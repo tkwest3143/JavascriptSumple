@@ -9,3 +9,6 @@ Javascript 勉強用のリポジトリです。
 ## electron_sample
 
 - electron のサンプルプロジェクトです。
+
+  簡単なTodoアプリを作成しています.
+  
