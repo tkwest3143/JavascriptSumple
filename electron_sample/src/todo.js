@@ -23,10 +23,18 @@ $(window).on("load", function () {
           return;
         } else {
           rows.forEach((row) => {
-            $("#todoArea").html("<h>" + row.title + "</h>" + row.discription);
+            $("#todoArea").after(
+              '<div id="todoitem">' +
+                '<div class="col-3">タイトル</div>' +
+                '<div id="txt_title" class="col-9"></div>' +
+                '<div class="col-3">内容</div>' +
+                '<div id="txt_discription" class="col-9"></div></div>'
+            );
+            $("#txt_title").html(row.title);
+            $("#txt_discription").html(row.discription);
             console.log(row);
-            return;
           });
+          return;
         }
       }
     }
@@ -48,10 +56,9 @@ $("#btnCreate").on("click", function () {
   const todo = new Todo(
     $("#title").val(),
     $("#discription").val(),
-    new Date(),
-    new Date()
+    $("#start_date").val() + $("#start_time").val(),
+    $("#end_date").val() + $("#end_time").val()
   );
-  console.log(todo);
   insertTodo(todo);
   window.close();
 });
@@ -66,12 +73,7 @@ function insertTodo(todo) {
     // データを登録する。
     var stmt = db.prepare(
       "INSERT INTO todo(title,discription,start_date,end_date) VALUES (?,?,?,?)",
-      [
-        todo.title,
-        todo.discription,
-        getStringFromDate(todo.start_date, "YYYY-MM-DD hh:mm:dd"),
-        getStringFromDate(todo.end_date, "YYYY-MM-DD hh:mm:dd"),
-      ]
+      [todo.title, todo.discription, todo.start_date, todo.end_date]
     );
     stmt.run();
     stmt.finalize();

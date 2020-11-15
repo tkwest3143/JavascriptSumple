@@ -15,7 +15,8 @@ body {
 .btn-menu:hover {
   background-color: rgba(117, 190, 218, 0.5); /* 50% 不透過 */
 }
-#btnTodayTodo {
+#todoitem {
+  border: 1px solid;
 }
 #header {
   height: 5vh;
