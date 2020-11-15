@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
+const webpack = require("webpack");
 
 module.exports = {
   // モード値を production に設定すると最適化された状態で、

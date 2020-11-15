@@ -1,6 +1,7 @@
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+var sqlite3 = require("sqlite3").verbose();
 
 let mainWindow = null;
 const debug = /--debug/.test(process.argv[2]);
@@ -22,6 +23,7 @@ function createWindow() {
   };
   // mainWindowを作成
   mainWindow = new BrowserWindow(windowOptions);
+  mainWindow.setMenu(null);
   // Electronに表示するhtmlを絶対パスで指定（相対パスだと動かない）
   mainWindow.loadURL("file://" + __dirname + "/index.html");
 
@@ -37,6 +39,7 @@ function createWindow() {
 
 app.on("ready", () => {
   createWindow();
+  dbInit();
 });
 
 app.on("window-all-closed", () => {
@@ -50,3 +53,14 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+/**
+ * DBが存在しない場合に作成します。
+ */
+function dbInit() {
+  var db = new sqlite3.Database("todo.db");
+  // テーブルを作成する。
+  db.run(
+    "CREATE TABLE IF NOT EXISTS todo (title TEXT, discription TEXT, start_date DATETIME, end_date DATETIME)"
+  );
+}

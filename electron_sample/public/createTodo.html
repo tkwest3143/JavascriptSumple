@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="lib/css/style.css" />
   </head>
   <body>
-    タイトル：<input type="text" id="title" /><br />
-    内容：<textarea id="discription"></textarea><br />
-    <input type="button" id="btnCreate" class="btn-menu" value="作成" />
+    <div class="container-fluid">
+      <div class="row">
+        <span class="col-4">タイトル：</span
+        ><input type="text" id="title" class="col-8" />
+
+        <span class="col-4">内容：</span>
+        <textarea id="discription" class="col-8"></textarea>
+        <span class="col-4">開始日：</span>
+        <input type="text" class="col-2 date" />
+        <input type="text" class="col-2 time" />
+      </div>
+      <input
+        type="button"
+        id="btnCreate"
+        class="btn-create w-20 h-5"
+        value="作成"
+      />
+    </div>
+
     <script type="text/javascript" src="lib/js/style.js"></script>
     <script type="text/javascript" src="../src/todo.js"></script>
     <script type="text/javascript" src="../src/utils/common.js"></script>
+    <script></script>
   </body>
 </html>

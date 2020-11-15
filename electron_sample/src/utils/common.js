@@ -1,5 +1,12 @@
 const remote = require("electron").remote;
 const { dialog } = require("electron").remote;
+const app = remote.app;
+
+var $ = require("jquery");
+var jQuery = require("jquery");
+require("jquery-timepicker/jquery.timepicker");
+require("jquery-ui/ui/widgets/datepicker");
+require("jquery-ui/ui/i18n/datepicker-ja");
 
 /**
  * OS規定のWebブラウザで指定されたurlを開きます。
@@ -15,19 +22,20 @@ function startBrowser(url) {
  * @param {String} url
  */
 function showModalWindow(url) {
+  remote.app;
   //window.open(url, "", "width=300,height=300");
   let subWindow = new remote.BrowserWindow({
     parent: remote.getCurrentWindow(), //親ウィンドウのBrowserWindowオブジェクト
     modal: true,
     show: false,
+    title: app.getName(),
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
     },
   });
-
-  subWindow.loadURL(url);
   subWindow.webContents.openDevTools();
+  subWindow.loadURL(url);
   subWindow.once("ready-to-show", () => {
     subWindow.show();
   });
@@ -74,3 +82,19 @@ function getStringFromDate(date, format) {
 
   return format_str;
 }
+
+/**
+ * 日付入力系
+ */
+// 2日本語を有効化
+$.datepicker.setDefaults($.datepicker.regional["ja"]);
+// 3日付選択ボックスを生成
+$(".date").datepicker({ dateFormat: "yy/mm/dd" });
+
+$(".time").timepicker({
+  timeFormat: "h:mm p",
+  defaultTime: new Date().getHours().toString(),
+  dynamic: true,
+  dropdown: true,
+  scrollbar: true,
+});
