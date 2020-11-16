@@ -17,6 +17,7 @@ function createWindow() {
     width: 1080,
     minWidth: 680,
     height: 840,
+    minHeight: 480,
     title: app.getName(),
     webPreferences: {
       nodeIntegration: true,
@@ -26,7 +27,6 @@ function createWindow() {
   // mainWindowを作成
   mainWindow = new BrowserWindow(windowOptions);
   mainWindow.setMenu(null);
-  // Electronに表示するhtmlを絶対パスで指定（相対パスだと動かない）
   mainWindow.loadURL("file://" + __dirname + "/index.html");
 
   // 次の起動コマンドでデバックモードで起動します: electron . --debug

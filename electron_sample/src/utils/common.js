@@ -22,14 +22,13 @@ function startBrowser(url) {
 
 /**
  * urlに指定されたファイルをモーダルウィンドウで開きます
- * @param {String} url
+ * @param {String} url モーダルで開く画面のURL
  */
 function showModalWindow(url) {
   remote.app;
-  //window.open(url, "", "width=300,height=300");
   let subWindow = new remote.BrowserWindow({
     parent: remote.getCurrentWindow(), //親ウィンドウのBrowserWindowオブジェクト
-    modal: true,
+    modal: true, //モーダル
     show: true,
     title: app.getName(),
     webPreferences: {
@@ -38,6 +37,7 @@ function showModalWindow(url) {
     },
   });
   subWindow.setMenu(null);
+  //デバッグ起動時にデバッグモードで開く
   if (debug) {
     globalShortcut.register("Ctrl+l", function () {
       if (isDevopen) {
@@ -68,9 +68,9 @@ function showDialog(message, type) {
 }
 
 /**
- *
- * @param {Date} date
- * @param {String} format
+ *Date型をStringに変換します
+ * @param {Date} date 変換対象の日付
+ * @param {String} format フォーマット
  */
 function getStringFromDate(date, format) {
   var year_str = date.getFullYear();
