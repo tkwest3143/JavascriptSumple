@@ -1,3 +1,6 @@
+/**
+ * 共通的な処理を実装しています。
+ */
 const remote = require("electron").remote;
 const { dialog } = require("electron").remote;
 const app = remote.app;
@@ -38,6 +41,7 @@ function showModalWindow(url) {
   });
   subWindow.setMenu(null);
   //デバッグ起動時にデバッグモードで開く
+  subWindow.webContents.openDevTools();
   if (debug) {
     globalShortcut.register("Ctrl+l", function () {
       if (isDevopen) {
@@ -112,3 +116,14 @@ $(".time").timepicker({
   dropdown: true,
   scrollbar: true,
 });
+
+/**
+ * ネットにつながっているかどうかを判定
+ */
+function isNetworkCoonnect() {
+  if (window.navigator.onLine) {
+    return true;
+  } else {
+    return false;
+  }
+}

@@ -58,6 +58,9 @@ app.on("window-all-closed", () => {
   }
 });
 
+/**
+ *
+ */
 app.on("activate", () => {
   if (mainWindow === null) {
     createWindow();
@@ -68,9 +71,9 @@ app.on("activate", () => {
  * DBが存在しない場合に作成します。
  */
 function dbInit() {
-  var db = new sqlite3.Database("todo.db");
+  var db = new sqlite3.Database("schedule.db");
   // テーブルを作成する。
   db.run(
-    "CREATE TABLE IF NOT EXISTS todo (title TEXT, discription TEXT, start_date DATETIME, end_date DATETIME)"
+    "CREATE TABLE IF NOT EXISTS todo ( todo_id INTEGER, title TEXT, discription TEXT, start_date DATETIME, end_date DATETIME)"
   );
 }

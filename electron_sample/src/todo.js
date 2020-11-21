@@ -1,17 +1,22 @@
+"use strict";
 var sqlite3 = require("sqlite3").verbose();
 var $ = require("jquery");
+const dbName_schedule = "schedule.db";
 
+const log4js = require("log4js");
+const logger = log4js.getLogger();
+logger.level = "debug";
 /**
  * イベント
  */
 //初期表示
 $(window).on("load", function () {
-  var db = new sqlite3.Database("todo.db");
+  var db = new sqlite3.Database(dbName_schedule);
   var start_date = new Date();
   var nextdate = start_date.getDate() + 1;
   //データを取得する
   return db.all(
-    "SELECT title,discription,start_date,end_date FROM todo order by start_date",
+    "SELECT todo_id,title,discription,start_date,end_date FROM todo order by start_date",
     function (err, rows) {
       if (err) {
         console.error(err.message);
@@ -22,17 +27,24 @@ $(window).on("load", function () {
           $("#todoArea").html("今日の予定はありません");
           return;
         } else {
+          var count = 0;
           rows.forEach((row) => {
             $("#todoArea").after(
-              '<div id="todoitem">' +
+              '<div class="todoitem" id="item_' +
+                count +
+                '">' +
                 '<div class="col-3">タイトル</div>' +
                 '<div id="txt_title" class="col-9"></div>' +
                 '<div class="col-3">内容</div>' +
-                '<div id="txt_discription" class="col-9"></div></div>'
+                '<div id="txt_discription" class="col-9"></div>' +
+                '<input type="hidden" id="todo_id" value="' +
+                row.todo_id +
+                '"' +
+                "</div>"
             );
             $("#txt_title").html(row.title);
             $("#txt_discription").html(row.discription);
-            console.log(row);
+            count++;
           });
           return;
         }
@@ -54,6 +66,7 @@ $("#btnShowTodo").on("click", function () {
 //作成ボタンクリック
 $("#btnCreate").on("click", function () {
   const todo = new Todo(
+    0,
     $("#title").val(),
     $("#discription").val(),
     $("#start_date").val() + $("#start_time").val(),
@@ -62,31 +75,66 @@ $("#btnCreate").on("click", function () {
   insertTodo(todo);
   window.close();
 });
+
+/**
+ * todo_idの最大値＋1を取得します。
+ */
+function getMaxTodoId() {
+  var db = new sqlite3.Database(dbName_schedule);
+  var maxno = 0;
+  db.serialize();
+  // todo情報のtodo_id最大値を取得し、＋１する
+  var strSql = "SELECT max(todo_id) id_max FROM todo";
+  return new Promise((resolve, reject) => {
+    db.get(strSql, function (err, row) {
+      if (err) {
+        logger.error(err);
+        return reject(err);
+      } else {
+        if (row.id_max != null) {
+          maxno += 1;
+        }
+        return resolve(maxno);
+      }
+    });
+  });
+}
 /**
  * todo情報を追加します
  * @param {Todo} todo 登録するtodo情報
  */
 function insertTodo(todo) {
-  var db = new sqlite3.Database("todo.db");
-  db.serialize(function () {
-    console.log(todo.title);
+  getMaxTodoId().then((result) => {
+    var db = new sqlite3.Database(dbName_schedule);
+    var maxno = 0;
+    maxno = result;
+    db.serialize();
+    todo.todo_id = maxno;
     // データを登録する。
     var stmt = db.prepare(
-      "INSERT INTO todo(title,discription,start_date,end_date) VALUES (?,?,?,?)",
-      [todo.title, todo.discription, todo.start_date, todo.end_date]
+      "INSERT INTO todo( todo_id,title,discription,start_date,end_date) VALUES (?,?,?,?,?)",
+      [
+        todo.todo_id,
+        todo.title,
+        todo.discription,
+        todo.start_date,
+        todo.end_date,
+      ]
     );
     stmt.run();
     stmt.finalize();
+
+    // DBを閉じる。
+    db.close();
   });
-  // DBを閉じる。
-  db.close();
 }
 
 /**
  *todo情報
  */
 class Todo {
-  constructor(title, discription, start_date, end_date) {
+  constructor(todo_id, title, discription, start_date, end_date) {
+    this.todo_id = todo_id;
     this.title = title;
     this.discription = discription;
     this.start_date = start_date;
