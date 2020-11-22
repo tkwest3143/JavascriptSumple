@@ -14,6 +14,10 @@ require("jquery-timepicker/jquery.timepicker");
 require("jquery-ui/ui/widgets/datepicker");
 require("jquery-ui/ui/i18n/datepicker-ja");
 
+const log4js = require("log4js");
+const logger = log4js.getLogger();
+logger.level = "debug";
+
 /**
  * OS規定のWebブラウザで指定されたurlを開きます。
  * @param {String} url 表示するURL
@@ -116,6 +120,36 @@ $(".time").timepicker({
   dropdown: true,
   scrollbar: true,
 });
+
+/**
+ * トリムします
+ * @param {Stirng}} str 変換対象文字列
+ */
+function comTrim(str) {
+  return str.replace(/^s+|s+$/g, "");
+}
+/**
+ * sql用のデータに変換します。
+ * @param {String} date 変換する日付
+ * @param {String} time 変換する時間
+ */
+function sqlDateTimeFormat(date, time) {
+  var retDate = date.replace(/\//g, "-");
+  var splTime_1 = comTrim(time).split(" ");
+  var splTime_2 = comTrim(splTime_1[0]).split(":");
+  logger.debug("retdate " + retDate);
+  logger.debug("splTime_1 " + splTime_1[0]);
+  logger.debug("splTime_2 " + splTime_2[0]);
+
+  if (comTrim(splTime_1[1]).match(/PM/)) {
+    var num = Number(splTime_2[0]) + 12;
+    splTime_2[0] = num;
+    logger.debug("splTime_2[0] " + splTime_2[0]);
+  }
+  var retTime = splTime_2[0] + ":" + splTime_2[1];
+  logger.debug(retDate + " " + retTime);
+  return retDate + " " + retTime;
+}
 
 /**
  * ネットにつながっているかどうかを判定

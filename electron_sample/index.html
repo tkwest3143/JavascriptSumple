@@ -2,25 +2,32 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="public/css/style.css" />
+    <link rel="stylesheet" href="public/lib/css/style.css" />
     <script type="text/javascript" src="src/utils/common.js"></script>
   </head>
 
   <body>
-    <a href="public/top.html" id="btnNext">ページ切り替え</a>
-    <br />
-    <button
-      id="btnTKwestGitHub"
-      onclick="startBrowser('https://github.com/tkwest3143');"
-    >
-      GitHubへ</button
-    ><br />
+    <div class="container">
+      <a href="public/top.html" class="btn btn-top" id="btnNext"
+        >ページ切り替え</a
+      >
+      <br />
+      <button
+        id="btnTKwestGitHub"
+        class="btn btn-top"
+        onclick="startBrowser('https://github.com/tkwest3143');"
+      >
+        GitHubへ</button
+      ><br />
 
-    <button
-      id="btnElectronGithub"
-      onclick="startBrowser('https://github.com/electron');"
-    >
-      ElectronのGitHubへ
-    </button>
+      <button
+        id="btnElectronGithub"
+        class="btn btn-top"
+        onclick="startBrowser('https://github.com/electron');"
+      >
+        ElectronのGitHubへ
+      </button>
+    </div>
+    <link rel="stylesheet" href="public/lib/js/style.js" />
   </body>
 </html>

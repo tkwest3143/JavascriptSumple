@@ -56,15 +56,15 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin({
       // 出力するファイル名
-      filename: "css/style.css",
+      filename: "../css/style.css",
     }),
   ],
   // 出力の設定
   output: {
-    // 出力するファイル名
-    filename: "js/style.js",
     // 出力先のパス
-    path: path.join(__dirname, "public/lib"),
+    path: path.join(__dirname, "public/lib/js"),
+    // 出力するファイル名
+    filename: "style.js",
   },
   // source-map方式でないと、CSSの元ソースが追跡できないため
   devtool: "source-map",

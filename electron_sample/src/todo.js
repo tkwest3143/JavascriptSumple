@@ -3,9 +3,6 @@ var sqlite3 = require("sqlite3").verbose();
 var $ = require("jquery");
 const dbName_schedule = "schedule.db";
 
-const log4js = require("log4js");
-const logger = log4js.getLogger();
-logger.level = "debug";
 /**
  * イベント
  */
@@ -69,13 +66,17 @@ $("#btnCreate").on("click", function () {
     0,
     $("#title").val(),
     $("#discription").val(),
-    $("#start_date").val() + $("#start_time").val(),
-    $("#end_date").val() + $("#end_time").val()
+    sqlDateTimeFormat($("#start_date").val(), $("#start_time").val()),
+    sqlDateTimeFormat($("#end_date").val(), $("#end_time").val())
   );
   insertTodo(todo);
   window.close();
 });
 
+$("btnTodayTodo").on("change", function () {
+  var valSelDate = $("btnTodayTodo").val();
+  $("btnTodayTodo").val(valSelDate + "の予定");
+});
 /**
  * todo_idの最大値＋1を取得します。
  */
@@ -92,7 +93,7 @@ function getMaxTodoId() {
         return reject(err);
       } else {
         if (row.id_max != null) {
-          maxno += 1;
+          maxno = row.id_max + 1;
         }
         return resolve(maxno);
       }
@@ -109,6 +110,7 @@ function insertTodo(todo) {
     var maxno = 0;
     maxno = result;
     db.serialize();
+    logger.debug(todo);
     todo.todo_id = maxno;
     // データを登録する。
     var stmt = db.prepare(

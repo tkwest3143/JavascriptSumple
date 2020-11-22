@@ -1,3 +1,198 @@
 @import "~bootstrap/scss/bootstrap.scss";
 @import "node_modules/jquery-ui-sass/assets/sass/jquery-ui.scss";
 @import "~../node_modules/jquery-timepicker/jquery.timepicker.css";
+
+//colors
+$red: #fff;
+$white: #fff;
+$black: #000000;
+
+//base styles
+
+* {
+  box-sizing: inherit;
+  transition-property: all;
+  transition-duration: 0.6s;
+  transition-timing-function: ease;
+  font-size: 12px;
+}
+html,
+body {
+  height: 100vh;
+  box-sizing: border-box;
+}
+body {
+  background: $red;
+  font-family: sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+}
+.menu {
+  background-color: #c1ffff;
+  height: 95vh;
+  overflow-y: hidden;
+}
+.btn-menu {
+  background-color: transparent;
+  border: none;
+}
+.btn-menu:hover {
+  background-color: rgba(117, 190, 218, 0.5); /* 50% 不透過 */
+}
+.todoitem {
+  border: 1px solid;
+}
+
+.todoitem:hover {
+  background-color: rgba(117, 190, 218, 0.5); /* 50% 不透過 */
+  cursor: pointer;
+}
+.header {
+  height: 5vh;
+  text-align: center;
+}
+
+.todoArea {
+  text-align: center;
+}
+
+// Main wrap
+.buttons {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+// Button wrap
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1em;
+  text-align: center;
+
+  @media (min-width: 600px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+h1 {
+  color: $black;
+  font-size: 1.25em;
+  font-weight: 900;
+  margin: 0 0 2em;
+
+  @media (min-width: 450px) {
+    font-size: 1.75em;
+  }
+
+  @media (min-width: 760px) {
+    font-size: 3.25em;
+  }
+
+  @media (min-width: 900px) {
+    font-size: 5.25em;
+    margin: 0 0 1em;
+  }
+}
+
+p {
+  color: $black;
+  font-size: 12px;
+
+  @media (min-width: 600px) {
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    top: 90%;
+  }
+
+  @media (max-height: 500px) {
+    left: 0;
+    position: relative;
+    top: 0;
+    transform: translate(0, 0);
+  }
+
+  a {
+    background: rgba($black, 0);
+    border-bottom: 1px solid;
+    color: $black;
+    line-height: 1.4;
+    padding: 0.25em;
+    text-decoration: none;
+
+    &:hover {
+      background: rgba($black, 1);
+      color: $red;
+    }
+  }
+}
+//button styles
+
+//default button
+.btn {
+  color: $black;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 45px;
+  margin: 0 0 2em;
+  max-width: 160px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  width: 100%;
+
+  @media (min-width: 600px) {
+    margin: 0 1em 2em;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+.btn-top {
+  letter-spacing: 0;
+}
+
+.btn-top:hover,
+.btn-top:active {
+  letter-spacing: 5px;
+  transition: 0.5s all;
+}
+
+.btn-top:after,
+.btn-top:before {
+  backface-visibility: hidden;
+  border: 1px solid rgba(#000, 0);
+  bottom: 0px;
+  content: " ";
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  transition: all 280ms ease-in-out;
+  width: 0;
+}
+
+.btn-top:hover:after,
+.btn-top:hover:before {
+  backface-visibility: hidden;
+  border-color: #000;
+  transition: width 350ms ease-in-out;
+  width: 70%;
+}
+
+.btn-top:hover:before {
+  bottom: auto;
+  top: 0;
+  width: 70%;
+}
+
+.btn-back {
+  margin: 0 auto;
+}
