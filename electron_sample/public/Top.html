@@ -9,10 +9,13 @@
     <div class="container-fluid h-100">
       <div>
         <div id="header" class="header">
-          <a href="../index.html" class="btn btn-top btn-back">戻る</a>
-          <button id="btnTodayTodo" class="btn-menu date" value="今日の予定▼">
-            今日の予定▼
-          </button>
+          <a href="../index.html" class="btn btn-top btn-back"> 戻る </a>
+          <input
+            type="button"
+            id="btnTodayTodo"
+            class="btn-menu date"
+            value="今日の予定▼"
+          />
         </div>
       </div>
       <div class="row maincontent">
@@ -30,9 +33,13 @@
             value="設定"
           />
         </div>
-        <div id="mainView" class="col-9">
-          <div id="todoArea" class="todoArea"></div>
-        </div>
+        
+          <div id="mainView" class="col-9">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
+            <div id="todoArea" class="todoArea"></div>
+            </nav>
+          </div>
+        
       </div>
     </div>
     <script type="text/javascript" src="lib/js/style.js"></script>

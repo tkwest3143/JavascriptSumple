@@ -1,9 +1,10 @@
 /**
  * 共通的な処理を実装しています。
  */
+const { ipcMain } = require("electron");
+const path = require("path");
 const remote = require("electron").remote;
-const { dialog } = require("electron").remote;
-const app = remote.app;
+const { dialog, app } = require("electron").remote;
 const globalShortcut = remote.globalShortcut;
 const debug = /--debug/.test(process.argv[2]);
 var isDevopen = false;
@@ -44,9 +45,10 @@ function showModalWindow(url) {
     },
   });
   subWindow.setMenu(null);
-  //デバッグ起動時にデバッグモードで開く
-  subWindow.webContents.openDevTools();
+
   if (debug) {
+    //デバッグ起動時にデバッグモードで開く
+    subWindow.webContents.openDevTools();
     globalShortcut.register("Ctrl+l", function () {
       if (isDevopen) {
         subWindow.webContents.closeDevTools();
@@ -160,4 +162,31 @@ function isNetworkCoonnect() {
   } else {
     return false;
   }
+}
+
+/**
+ * ファイルダイアログを表示します。
+ */
+function fileDialogOpen() {
+  shell.showItemInFolder(os.homedir());
+}
+
+/**
+ *通知配信クラス
+ * @param {String}} title タイトル
+ * @param {String} body 本文
+ */
+function sendTsuchi(title, body) {
+  const notification = {
+    title: title,
+    body: body,
+  };
+  const myNotification = new window.Notification(
+    notification.title,
+    notification
+  );
+
+  myNotification.onclick = () => {
+    console.log("Notification clicked");
+  };
 }

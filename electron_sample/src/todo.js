@@ -77,6 +77,10 @@ $("btnTodayTodo").on("change", function () {
   var valSelDate = $("btnTodayTodo").val();
   $("btnTodayTodo").val(valSelDate + "の予定");
 });
+
+$("#btnSetting").on("click", function () {
+  sendTsuchi();
+});
 /**
  * todo_idの最大値＋1を取得します。
  */
