@@ -8,13 +8,13 @@ $white: #fff;
 $black: #000000;
 
 //base styles
-
 * {
   box-sizing: inherit;
   transition-property: all;
   transition-duration: 0.6s;
   transition-timing-function: ease;
   font-size: 12px;
+  overflow: hidden;
 }
 html,
 body {
@@ -27,10 +27,15 @@ body {
   font-weight: 400;
   font-size: 12px;
 }
+.maincontent {
+  overflow: hidden;
+  border-top: 0.1px solid #000000;
+}
 .menu {
+  display: block;
   background-color: #c1ffff;
   height: 95vh;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 .btn-menu {
   background-color: transparent;
@@ -52,10 +57,18 @@ body {
   text-align: center;
 }
 
-.todoArea {
-  text-align: center;
+.btn-back {
+  margin-right: auto;
+  margin-left: 0;
 }
 
+.mainView {
+  display: block;
+  overflow-y: scroll;
+  height: 95vh;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 // Main wrap
 .buttons {
   display: flex;
@@ -72,7 +85,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 1em;
+  padding: 0.5em;
   text-align: center;
 
   @media (min-width: 600px) {
@@ -85,7 +98,7 @@ h1 {
   color: $black;
   font-size: 1.25em;
   font-weight: 900;
-  margin: 0 0 2em;
+  margin: 0 0 1em;
 
   @media (min-width: 450px) {
     font-size: 1.75em;
@@ -123,8 +136,8 @@ p {
     background: rgba($black, 0);
     border-bottom: 1px solid;
     color: $black;
-    line-height: 1.4;
-    padding: 0.25em;
+    line-height: 1;
+    padding: 0.1em;
     text-decoration: none;
 
     &:hover {
@@ -140,8 +153,8 @@ p {
   color: $black;
   cursor: pointer;
   font-weight: 400;
-  line-height: 45px;
-  margin: 0 0 2em;
+  line-height: 25px;
+  margin: 0 0 1em;
   max-width: 160px;
   position: relative;
   text-decoration: none;
@@ -149,7 +162,7 @@ p {
   width: 100%;
 
   @media (min-width: 600px) {
-    margin: 0 1em 2em;
+    margin: 0 0.5em 1em;
   }
 
   &:hover {

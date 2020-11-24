@@ -25,6 +25,7 @@ $(window).on("load", function () {
           return;
         } else {
           var count = 0;
+          $("#todoArea").after('<div class="todoItemList">');
           rows.forEach((row) => {
             $("#todoArea").after(
               '<div class="todoitem" id="item_' +
@@ -43,6 +44,8 @@ $(window).on("load", function () {
             $("#txt_discription").html(row.discription);
             count++;
           });
+          $("#todoArea").after("</div>");
+          $("#todoItemList").css({ overflow: "scroll" });
           return;
         }
       }

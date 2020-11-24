@@ -7,9 +7,11 @@
   </head>
   <body>
     <div class="container-fluid h-100">
-      <div>
-        <div id="header" class="header">
+      <div id="header" class="row header">
+        <div class="col-3">
           <a href="../index.html" class="btn btn-top btn-back"> 戻る </a>
+        </div>
+        <div class="col-9">
           <input
             type="button"
             id="btnTodayTodo"
@@ -18,6 +20,7 @@
           />
         </div>
       </div>
+
       <div class="row maincontent">
         <div id="menu" class="menu col-3">
           <input
@@ -33,13 +36,10 @@
             value="設定"
           />
         </div>
-        
-          <div id="mainView" class="col-9">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light"></nav>
-            <div id="todoArea" class="todoArea"></div>
-            </nav>
-          </div>
-        
+
+        <div id="mainView" class="mainView col-9">
+          <div id="todoArea" class="todoArea"></div>
+        </div>
       </div>
     </div>
     <script type="text/javascript" src="lib/js/style.js"></script>
