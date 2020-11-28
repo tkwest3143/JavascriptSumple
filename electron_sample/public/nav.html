@@ -1,0 +1,18 @@
+<div class="container">
+    <button class="btn btn-top" id="btnNext">ページ切り替え</a>
+        <br />
+        <button id="btnTKwestGitHub" class="btn btn-top" onclick="startBrowser('https://github.com/tkwest3143');">
+            GitHubへ</button><br />
+
+        <button id="btnElectronGithub" class="btn btn-top" onclick="startBrowser('https://github.com/electron');">
+            ElectronのGitHubへ
+        </button>
+</div>
+<script>
+    $("#btnNext").on("click", function () {
+        $(".page").addClass("show");
+        $(".nav").removeClass("show");
+        $(".page").removeClass("hidden");
+        $(".nav").addClass("hidden");
+    });
+</script>

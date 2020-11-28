@@ -1,6 +1,5 @@
 "use strict";
 var sqlite3 = require("sqlite3").verbose();
-var $ = require("jquery");
 const dbName_schedule = "schedule.db";
 
 /**
@@ -54,17 +53,17 @@ $(window).on("load", function () {
   db.close();
 });
 //予定を作成するボタンクリック
-$("#btnCreateTodo").on("click", function () {
-  showModalWindow("file://" + __dirname + "/createTodo.html");
+function btnCreateTodo_click() {
+  showModalWindow("file://" + __dirname + "/public/createTodo.html");
   $(window).on("close");
-});
+}
 //予定を見るボタンクリック
-$("#btnShowTodo").on("click", function () {
+function btnShowTodo_click() {
   showDialog("作成してもよろしいですか？", "info");
-});
+}
 
 //作成ボタンクリック
-$("#btnCreate").on("click", function () {
+function btnCreate_click() {
   const todo = new Todo(
     0,
     $("#title").val(),
@@ -74,16 +73,16 @@ $("#btnCreate").on("click", function () {
   );
   insertTodo(todo);
   window.close();
-});
+}
 
-$("btnTodayTodo").on("change", function () {
-  var valSelDate = $("btnTodayTodo").val();
-  $("btnTodayTodo").val(valSelDate + "の予定");
-});
+function btnBack_click() {
+  $(".page").removeClass("show");
+  $(".nav").addClass("show");
+  $(".page").addClass("hidden");
+  $(".nav").removeClass("hidden");
+}
 
-$("#btnSetting").on("click", function () {
-  sendTsuchi();
-});
+$("#btnSetting").on("click", function () {});
 /**
  * todo_idの最大値＋1を取得します。
  */

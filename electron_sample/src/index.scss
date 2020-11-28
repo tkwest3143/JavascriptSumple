@@ -27,6 +27,27 @@ body {
   font-weight: 400;
   font-size: 12px;
 }
+.nav {
+  position: absolute;
+  display: flex;
+  z-index: 0;
+}
+.nav.hidden {
+  visibility: hidden;
+}
+.nav.show {
+  visibility: visible;
+}
+.page.hidden {
+  visibility: hidden;
+}
+.page.show {
+  visibility: visible;
+}
+.page {
+  display: flex;
+  z-index: 1;
+}
 .maincontent {
   overflow: hidden;
   border-top: 0.1px solid #000000;

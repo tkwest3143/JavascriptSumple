@@ -3,31 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="public/lib/css/style.css" />
-    <script type="text/javascript" src="src/utils/common.js"></script>
   </head>
 
   <body>
-    <div class="container">
-      <a href="./public/top.html" class="btn btn-top" id="btnNext"
-        >ページ切り替え</a
-      >
-      <br />
-      <button
-        id="btnTKwestGitHub"
-        class="btn btn-top"
-        onclick="startBrowser('https://github.com/tkwest3143');"
-      >
-        GitHubへ</button
-      ><br />
-
-      <button
-        id="btnElectronGithub"
-        class="btn btn-top"
-        onclick="startBrowser('https://github.com/electron');"
-      >
-        ElectronのGitHubへ
-      </button>
+    <div class="container" id="mainwindow">
+      <div id="nav" class="nav show"></div>
+      <div id="page" class="page hidden"></div>
     </div>
-    <link rel="stylesheet" href="public/lib/js/style.js" />
+    <script type="text/javascript" src="public/lib/js/style.js"></script>
+    <script type="text/javascript" src="src/utils/common.js"></script>
+    <script type="text/javascript" src="src/todo.js"></script>
   </body>
 </html>

@@ -1,16 +1,18 @@
 /**
  * 共通的な処理を実装しています。
  */
+
+//require
 const { ipcMain } = require("electron");
 const path = require("path");
+const glob = require("glob");
 const remote = require("electron").remote;
 const { dialog, app } = require("electron").remote;
 const globalShortcut = remote.globalShortcut;
 const debug = /--debug/.test(process.argv[2]);
-var isDevopen = false;
 
-var $ = require("jquery");
-var jQuery = require("jquery");
+const $ = require("jquery");
+const jQuery = require("jquery");
 require("jquery-timepicker/jquery.timepicker");
 require("jquery-ui/ui/widgets/datepicker");
 require("jquery-ui/ui/i18n/datepicker-ja");
@@ -19,6 +21,7 @@ const log4js = require("log4js");
 const logger = log4js.getLogger();
 logger.level = "debug";
 
+var isDevopen = false;
 /**
  * OS規定のWebブラウザで指定されたurlを開きます。
  * @param {String} url 表示するURL
@@ -124,7 +127,7 @@ $(".time").timepicker({
 });
 
 /**
- * トリムします
+ * 指定した文字列をトリムします
  * @param {Stirng}} str 変換対象文字列
  */
 function comTrim(str) {
@@ -190,3 +193,7 @@ function sendTsuchi(title, body) {
     console.log("Notification clicked");
   };
 }
+
+$("#nav").load(path.join(__dirname, "/public/nav.html"));
+
+$("#page").load(path.join(__dirname, "/public/top.html"));
