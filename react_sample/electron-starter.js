@@ -26,7 +26,7 @@ function createWindow() {
   // mainWindowを作成
   mainWindow = new BrowserWindow(windowOptions);
   mainWindow.setMenu(null);
-  mainWindow.loadURL("http://localhost:3000");
+  mainWindow.loadURL("file://" + __dirname + "/public/index.html");
 
   // 次の起動コマンドでデバックモードで起動します: electron . --debug
   if (debug) {
