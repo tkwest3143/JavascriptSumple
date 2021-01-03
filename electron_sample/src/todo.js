@@ -53,11 +53,7 @@ $(window).on("load", function () {
   );
   db.close();
 });
-//予定を作成するボタンクリック
-$("#btnCreateTodo").on("click", function () {
-  showModalWindow("file://" + __dirname + "/createTodo.html");
-  $(window).on("close");
-});
+
 //予定を見るボタンクリック
 $("#btnShowTodo").on("click", function () {
   showDialog("作成してもよろしいですか？", "info");
@@ -76,14 +72,12 @@ $("#btnCreate").on("click", function () {
   window.close();
 });
 
+// 今日の予定ボタンクリック
 $("btnTodayTodo").on("change", function () {
   var valSelDate = $("btnTodayTodo").val();
   $("btnTodayTodo").val(valSelDate + "の予定");
 });
 
-$("#btnSetting").on("click", function () {
-  sendTsuchi();
-});
 /**
  * todo_idの最大値＋1を取得します。
  */
@@ -112,10 +106,10 @@ function getMaxTodoId() {
  * @param {Todo} todo 登録するtodo情報
  */
 function insertTodo(todo) {
-  getMaxTodoId().then((result) => {
+  //getMaxTodoId().then((result) => {
     var db = new sqlite3.Database(dbName_schedule);
     var maxno = 0;
-    maxno = result;
+    //maxno = result;
     db.serialize();
     logger.debug(todo);
     todo.todo_id = maxno;
@@ -130,12 +124,17 @@ function insertTodo(todo) {
         todo.end_date,
       ]
     );
-    stmt.run();
+    stmt.run((err)=>{
+      if(err!=null){
+        logger.debug(err);
+      }
+      
+    });
     stmt.finalize();
 
     // DBを閉じる。
     db.close();
-  });
+  //});
 }
 
 /**

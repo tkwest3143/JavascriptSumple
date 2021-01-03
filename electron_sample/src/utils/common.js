@@ -44,7 +44,7 @@ function showModalWindow(url) {
       enableRemoteModule: true,
     },
   });
-  subWindow.setMenu(null);
+  //subWindow.setMenu(null);
 
   if (debug) {
     //デバッグ起動時にデバッグモードで開く
