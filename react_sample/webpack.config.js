@@ -1,72 +1,37 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const path = require("path");
-const webpack = require("webpack");
+var debug = process.env.NODE_ENV !== "production";
+var webpack = require("webpack");
+var path = require("path");
 
 module.exports = {
-  // モード値を production に設定すると最適化された状態で、
-  // development に設定するとソースマップ有効でJSファイルが出力される
-  mode: "production",
+  context: path.join(__dirname, "src"),
+  entry: "./js/client.js",
   module: {
     rules: [
       {
-        // 対象となるファイルの拡張子(scss)
-        test: /\.scss$/,
-        // Sassファイルの読み込みとコンパイル
+        test: /\.jsx?$/,
+        exclude: /(node_modules|bower_components)/,
         use: [
-          // CSSファイルを書き出すオプションを有効にする
           {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          // CSSをバンドルするための機能
-          {
-            loader: "css-loader",
+            loader: "babel-loader",
             options: {
-              // オプションでCSS内のurl()メソッドの取り込まない
-              url: false,
-              // ソースマップの利用有無
-              sourceMap: true,
-              // Sass+PostCSSの場合は2を指定
-              importLoaders: 2,
-            },
-          },
-          // PostCSSのための設定
-          {
-            loader: "postcss-loader",
-            options: {
-              // PostCSS側でもソースマップを有効にする
-              sourceMap: true,
-              postcssOptions: {
-                // ベンダープレフィックスを自動付与する
-                plugins: ["autoprefixer"],
-              },
-            },
-          },
-          // Sassをバンドルするための機能
-          {
-            loader: "sass-loader",
-            options: {
-              // ソースマップの利用有無
-              sourceMap: true,
+              presets: ["@babel/preset-react", "@babel/preset-env"],
             },
           },
         ],
       },
     ],
   },
-  plugins: [
-    new MiniCssExtractPlugin({
-      // 出力するファイル名
-      filename: "../css/style.css",
-    }),
-  ],
-  entry: "./src/webpack.js",
-  // 出力の設定
   output: {
-    // 出力先のパス
-    path: path.join(__dirname, "public/lib/js"),
-    // 出力するファイル名
-    filename: "style.js",
+    path: __dirname + "/react_sample/",
+    filename: "client.min.js",
   },
-  // source-map方式でないと、CSSの元ソースが追跡できないため
-  devtool: "source-map",
+  plugins: debug
+    ? []
+    : [
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+          mangle: false,
+          sourcemap: false,
+        }),
+      ],
 };

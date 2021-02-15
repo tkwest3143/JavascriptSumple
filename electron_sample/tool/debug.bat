@@ -1,6 +1,6 @@
 cd %~dp0
-cd ../
+cd ../node_modules/.bin
 
-electron . --debug
+electron ../.. --debug
 
 exit 0
