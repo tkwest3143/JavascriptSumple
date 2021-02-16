@@ -24,6 +24,7 @@ module.exports = {
   output: {
     path: __dirname + "/react_sample/",
     filename: "client.min.js",
+    publicPath: "/",
   },
   plugins: debug
     ? []

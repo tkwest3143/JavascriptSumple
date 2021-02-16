@@ -1,4 +1,6 @@
 import React from "react";
+import UserProfile from "../data/user";
+import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
 export default class Login extends React.Component {
   handleChange(e) {
